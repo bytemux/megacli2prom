@@ -69,91 +69,91 @@ def main():
       ]
     },
     { 
-      'regex': re.compile('^Product\s+Name\s+: .+'),
+      'regex': re.compile('^Product\s+Name\s+:\s*.+'),
       'action': [
         'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "product_name": line.split(":")[1].strip()}, "val": 1})'
        ] 
     },
     { 
-      'regex': re.compile('^FW\s+Package\s+Build\s*: .+'),
+      'regex': re.compile('^FW\s+Package\s+Build\s*:\s*.+'),
       'action': [
         'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "package_build": line.split(":")[1].strip()}, "val": 1 })'
        ]
     },
     { 
-      'regex': re.compile('^FW\s+Version\s+: .+'),
+      'regex': re.compile('^FW\s+Version\s+:\s*.+'),
       'action': [
         'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "firmware_version": line.split(":")[1].strip()}, "val": 1 })'
       ]
     },
     {
-      'regex': re.compile('^BIOS\s+Version\s+: .+'),
+      'regex': re.compile('^BIOS\s+Version\s+:\s*.+'),
       'action': [
         'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "bios_version": line.split(":")[1].strip()}, "val": 1 })'
       ]
     },
     {
-      'regex': re.compile('^Memory\s+Size\s+: .+'),
+      'regex': re.compile('^Memory\s+Size\s+:\s*.+'),
       'action': [
         'out["megacli_memory_size_bytes"]["metrics"].append({ "labels": { "adapter": adapter, "type": "Total memory" }, "val": tobytes(line.split(":")[1].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Current\s+Size\s+of\s+FW\s+Cache\s+: .+'),
+      'regex': re.compile('^Current\s+Size\s+of\s+FW\s+Cache\s+:\s*.+'),
       'action': [
         'out["megacli_memory_size_bytes"]["metrics"].append({ "labels": { "adapter": adapter, "type": "Write cache" }, "val": tobytes(line.split(":")[1].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Virtual\s+Drives\s+: .+'),
+      'regex': re.compile('^Virtual\s+Drives\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "virtual", "state": "Total" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^\s+Degraded\s+: .+'),
+      'regex': re.compile('^\s+Degraded\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "virtual", "state": "Degraded" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^\s+Offline\s+: .+'),
+      'regex': re.compile('^\s+Offline\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "virtual", "state": "Offline" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Physical\s+Devices\s+: .+'),
+      'regex': re.compile('^Physical\s+Devices\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "physical", "state": "PhysicalTotal" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^\s+Disks\s+: .+'),
+      'regex': re.compile('^\s+Disks\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "physical", "state": "DisksTotal"  }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^\s+Critical\s+Disks\s+: .+'),
+      'regex': re.compile('^\s+Critical\s+Disks\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "physical", "state": "Critical"  }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^\s+Failed\s+Disks\s+: .+'),
+      'regex': re.compile('^\s+Failed\s+Disks\s+:\s*.+'),
       'action': [
         'out["megacli_drives"]["metrics"].append({ "labels": { "adapter": adapter, "type": "physical", "state": "Failed"  }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Memory\s+Correctable\s+Errors\s+: .+'),
+      'regex': re.compile('^Memory\s+Correctable\s+Errors\s+:\s*.+'),
       'action': [
         'out["megacli_memory_errors"]["metrics"].append({ "labels": { "adapter": adapter, "type": "correctable"  }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Memory\s+Uncorrectable\s+Errors\s+: .+'),
+      'regex': re.compile('^Memory\s+Uncorrectable\s+Errors\s+:\s*.+'),
       'action': [
         'out["megacli_memory_errors"]["metrics"].append({ "labels": { "adapter": adapter, "type": "uncorrectable"  }, "val": line.split(":")[1].strip() })'
       ]
@@ -172,15 +172,15 @@ def main():
       'action': ['adapter=line.split("#")[1].strip()']
     },
     {
-      'regex': re.compile('^Enclosure\s+Device\s+ID: .+'),
+      'regex': re.compile('^Enclosure\s+Device\s+ID:\s*.+'),
       'action': ['enclosure=line.split(":")[1].strip()']
     },
     {
-      'regex': re.compile('^Slot\s+Number\s*: .+'),
+      'regex': re.compile('^Slot\s+Number\s*:\s*.+'),
       'action': ['slot=line.split(":")[1].strip()']
     },
     {
-      'regex': re.compile('^Drive\'s\s+position: .+'),
+      'regex': re.compile('^Drive\'s\s+position:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "disk_group"}, "val": line.split(":")[2].split(",")[0].strip() })',
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "span"}, "val": line.split(":")[3].split(",")[0].strip() })',
@@ -188,99 +188,99 @@ def main():
       ]
     },
     {
-      'regex': re.compile('^Device\s+Id\s*: .+'),
+      'regex': re.compile('^Device\s+Id\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "device_id" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^WWN\s*: .+'),
+      'regex': re.compile('^WWN\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "wwn" }, "val": int(line.split(":")[1].strip(), 16) })'
       ]
     },
     {
-      'regex': re.compile('^Sequence\s+Number\s*: .+'),
+      'regex': re.compile('^Sequence\s+Number\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "sequence_number" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Media\s+Error\s+Count\s*: .+'),
+      'regex': re.compile('^Media\s+Error\s+Count\s*:\s*.+'),
       'action': [
         'out["megacli_pd_errors"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "media" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Other\s+Error\s+Count\s*: .+'),
+      'regex': re.compile('^Other\s+Error\s+Count\s*:\s*.+'),
       'action': [
         'out["megacli_pd_errors"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "other" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Predictive\s+Failure\s+Count\s*: .+'),
+      'regex': re.compile('^Predictive\s+Failure\s+Count\s*:\s*.+'),
       'action': [
         'out["megacli_pd_errors"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "predictive" }, "val": line.split(":")[1].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Raw\s+Size\s*: .+'),
+      'regex': re.compile('^Raw\s+Size\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "size_raw" }, "val": tobytes(line.split(":")[1].split("[")[0].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Non\s+Coerced\s+Size\s*: .+'),
+      'regex': re.compile('^Non\s+Coerced\s+Size\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "size_non_coerced" }, "val": tobytes(line.split(":")[1].split("[")[0].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Coerced\s+Size\s*: .+'),
+      'regex': re.compile('^Coerced\s+Size\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "size_coerced" }, "val": tobytes(line.split(":")[1].split("[")[0].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Firmware\s+state\s*: .+'),
+      'regex': re.compile('^Firmware\s+state\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "state" }, "val": state2int(line.split(":")[1].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Connected\s+Port\s+Number\s*: .+'),
+      'regex': re.compile('^Connected\s+Port\s+Number\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "port" }, "val": line.split(":")[1].split("(")[0].strip() })',
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "path" }, "val": line.split("path")[1].split(")")[0].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Needs\s+EKM\s+Attention\s*: .+'),
+      'regex': re.compile('^Needs\s+EKM\s+Attention\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "ekm_attention_needed" }, "val": yesno(line.split(":")[1].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Device\s+Speed\s*: .+'),
+      'regex': re.compile('^Device\s+Speed\s*:\s*.+'),
       'action': [
         'out["megacli_pd_speed_bits"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "drive" }, "val": tobytes(line.split(":")[1].split("/")[0].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Link\s+Speed\s*: .+'),
+      'regex': re.compile('^Link\s+Speed\s*:\s*.+'),
       'action': [
         'out["megacli_pd_speed_bits"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "link" }, "val": tobytes(line.split(":")[1].split("/")[0].strip()) })'
       ]
     },
     {
-      'regex': re.compile('^Drive\s+Temperature\s*: .+'),
+      'regex': re.compile('^Drive\s+Temperature\s*:\s*.+'),
       'action': [
         'out["megacli_pd_temperature"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "celsius" }, "val": line.split(":")[1].split("C")[0].strip() })',
         'out["megacli_pd_temperature"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "barbarians" }, "val": line.split("(")[1].split(" ")[0].strip() })'
       ]
     },
     {
-      'regex': re.compile('^Drive\s+has\s+flagged\s+a\s+S.M.A.R.T\s+alert\s*: .+'),
+      'regex': re.compile('^Drive\s+has\s+flagged\s+a\s+S.M.A.R.T\s+alert\s*:\s*.+'),
       'action': [
         'out["megacli_pd_info"]["metrics"].append({ "labels": { "adapter": adapter, "enclosure": enclosure, "slot": slot, "type": "smart_alert" }, "val": yesno(line.split(":")[1].strip()) })'
       ]
