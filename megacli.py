@@ -3,6 +3,7 @@
 import subprocess
 import re
 import json
+import os
 
 PATH_CMDS = [ '/opt/MegaRAID/MegaCli/MegaCli64', 
               '/opt/MegaRAID/MegaCli/MegaCli',
