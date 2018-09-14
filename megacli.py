@@ -4,6 +4,11 @@ import subprocess
 import re
 import json
 
+PATH_CMDS = [ '/opt/MegaRAID/MegaCli/MegaCli64', 
+              '/opt/MegaRAID/MegaCli/MegaCli',
+              '/usr/sbin/megacli', 
+            ]
+
 def yesno(state):
   states = {
     "No": 0
@@ -32,6 +37,13 @@ def tobytes(inp):
   return inp
 
 def main():
+  path_megacli = ""
+  for name in PATH_CMDS:
+    if os.path.isfile(name):
+      path_megacli = name
+      break
+  if path_megacli == "":
+    return
   info = subprocess.check_output(['/opt/MegaRAID/MegaCli/MegaCli64', '-AdpAllInfo', '-aAll', '-nolog']).decode('utf-8').splitlines()
   pdlist = subprocess.check_output(['/opt/MegaRAID/MegaCli/MegaCli64', '-PdList', '-aAll', '-nolog']).decode('utf-8').splitlines()
   out = {}
