@@ -35,7 +35,7 @@ def tobytes(inp):
       return float(inp.replace(suffix[i],'').strip()) * pow(1024,i+1)
     else:
       i+=1
-  return inp
+  return -1
 
 def main():
   path_megacli = ""
@@ -65,25 +65,25 @@ def main():
     { 
       'regex': re.compile('^Product\s+Name\s+:\s*\S+'),
       'action': [
-        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "product_name": line.split(":")[1].strip()}, "val": 1})'
+        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "type": "product_name", "state": line.split(":")[1].strip()}, "val": 1})'
        ] 
     },
     { 
       'regex': re.compile('^FW\s+Package\s+Build\s*:\s*\S+'),
       'action': [
-        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "package_build": line.split(":")[1].strip()}, "val": 1 })'
+        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "type": "package_build", "state": line.split(":")[1].strip()}, "val": 1 })'
        ]
     },
     { 
       'regex': re.compile('^FW\s+Version\s+:\s*\S+'),
       'action': [
-        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "firmware_version": line.split(":")[1].strip()}, "val": 1 })'
+        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "type": "firmware_version", "state": line.split(":")[1].strip()}, "val": 1 })'
       ]
     },
     {
       'regex': re.compile('^BIOS\s+Version\s+:\s*\S+'),
       'action': [
-        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "bios_version": line.split(":")[1].strip()}, "val": 1 })'
+        'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "type": "bios_version", "state": line.split(":")[1].strip()}, "val": 1 })'
       ]
     },
     {
