@@ -63,12 +63,6 @@ def main():
 
   pat_info = [
     { 
-      'regex': re.compile('^Adapter\s+#\d+'),
-      'action': [
-        'adapter=line.split("#")[1].strip()'
-      ]
-    },
-    { 
       'regex': re.compile('^Product\s+Name\s+:\s*.+'),
       'action': [
         'out["megacli_controller"]["metrics"].append({ "labels": { "adapter": adapter, "product_name": line.split(":")[1].strip()}, "val": 1})'
@@ -167,18 +161,6 @@ def main():
   wwn=None
   
   pat_pd = [
-    {
-      'regex': re.compile('^Adapter\s+#\d+'),
-      'action': ['adapter=line.split("#")[1].strip()']
-    },
-    {
-      'regex': re.compile('^Enclosure\s+Device\s+ID:\s*.+'),
-      'action': ['enclosure=line.split(":")[1].strip()']
-    },
-    {
-      'regex': re.compile('^Slot\s+Number\s*:\s*.+'),
-      'action': ['slot=line.split(":")[1].strip()']
-    },
     {
       'regex': re.compile('^Drive\'s\s+position:\s*.+'),
       'action': [
@@ -290,7 +272,13 @@ def main():
   for m in metrics:
     exec(m)
 
+  re_adap = re.compile('^Adapter\s+#\d+')
+  re_encl = re.compile('^Enclosure\s+Device\s+ID:\s*.+')
+  re_slot = re.compile('^Slot\s+Number\s*:\s*.+')
+
   for line in info: 
+    if re_adap.match(line):
+      adapter = line.split('#')[1].strip()
     for p in pat_info:
       if p['regex'].match(line):
         for a in p['action']:
@@ -298,6 +286,12 @@ def main():
         continue
 
   for line in pdlist:
+    if re_adap.match(line):
+      adapter = line.split('#')[1].strip()
+    elif re_encl.match(line):
+      enclosure = line.split(":")[1].strip()
+    elif re_slot.match(line):
+      slot = line.split(':')[1].strip()
     for p in pat_pd:
       if p['regex'].match(line):
         for a in p['action']:
