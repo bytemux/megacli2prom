@@ -44,8 +44,8 @@ def main():
       break
   if path_megacli == "":
     return
-  info = subprocess.check_output(['/opt/MegaRAID/MegaCli/MegaCli64', '-AdpAllInfo', '-aAll', '-nolog']).decode('utf-8').splitlines()
-  pdlist = subprocess.check_output(['/opt/MegaRAID/MegaCli/MegaCli64', '-PdList', '-aAll', '-nolog']).decode('utf-8').splitlines()
+  info = subprocess.check_output([path_megacli, '-AdpAllInfo', '-aAll', '-nolog']).decode('utf-8').splitlines()
+  pdlist = subprocess.check_output([path_megacli, '-PdList', '-aAll', '-nolog']).decode('utf-8').splitlines()
   out = {}
   adapter = None
 
