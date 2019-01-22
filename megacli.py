@@ -285,6 +285,7 @@ def main():
           exec(a)
         continue
 
+  re_na = re.compile('.+:.+N/A')
   for line in pdlist:
     if re_adap.match(line):
       adapter = line.split('#')[1].strip()
@@ -292,6 +293,8 @@ def main():
       enclosure = line.split(":")[1].strip()
     elif re_slot.match(line):
       slot = line.split(':')[1].strip()
+    elif re_na.match(line):
+      continue
     for p in pat_pd:
       if p['regex'].match(line):
         for a in p['action']:
